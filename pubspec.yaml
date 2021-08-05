@@ -1,0 +1,57 @@
+name: mullr_components
+description: A new Flutter package project.
+version: 0.0.1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  auto_route: ^2.2.0
+  cloud_firestore: ^2.4.0
+  crypto: ^3.0.1
+  connectivity_plus: ^1.0.6
+  device_info: ^2.0.2
+  encrypt: ^5.0.0
+  entry: ^0.0.5
+  firebase_auth: ^3.0.1
+  firebase_crashlytics: ^2.1.1
+  firebase_messaging: ^10.0.4
+  firebase_remote_config: ^0.10.0+3
+  flutter_facebook_auth: ^3.5.0
+  fluttertoast: ^8.0.7
+  font_awesome_flutter: ^9.1.0
+  gap: ^2.0.0
+  get_it: ^7.2.0
+  google_fonts: ^2.1.0
+  google_sign_in: ^5.0.3
+  hive: ^2.0.4
+  dart_jsonwebtoken: ^2.1.1
+  local_auth: ^1.1.5
+  mask_text_input_formatter: ^2.0.0
+  pointycastle: ^3.0.1
+  rsa_encrypt: ^2.0.0
+  shared_preferences: ^2.0.6
+  sign_in_with_apple: ^3.0.0
+  stacked: ^2.2.3
+  steel_crypt: ^3.0.0+1
+
+
+  # Requires Android setup
+  flutter_secure_storage: ^4.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^2.0.1
+  hive_generator: ^1.0.1
+  json_serializable: ^4.0.0
+
+
+flutter:
+
+
