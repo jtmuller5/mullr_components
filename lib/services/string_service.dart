@@ -48,29 +48,35 @@ class StringService {
       return 'Password must contain a number';
     } else if (!containsSpecialCharacter(password)) {
       return 'Password must contain a special character';
-    } else {
+    } else if (!contains6Characters(password)) {
+      return 'Password must contain at least 6 characters';
+    }else {
       return null;
     }
   }
 
-  bool isEmpty(value) {
+  bool isEmpty(String? value) {
     return (value == null || value.trim() == '');
   }
 
-  bool containsUppercase(value) {
-    return RegExp(r'(?=.*[A-Z])').hasMatch(value);
+  bool containsUppercase(String? value) {
+    return RegExp(r'(?=.*[A-Z])').hasMatch(value ?? '');
   }
 
-  bool containsLowercase(value) {
-    return RegExp(r'(?=.*[a-z])').hasMatch(value);
+  bool containsLowercase(String? value) {
+    return RegExp(r'(?=.*[a-z])').hasMatch(value ?? '');
   }
 
-  bool containsNumber(value) {
-    return RegExp(r'(?=.*?[0-9])').hasMatch(value);
+  bool containsNumber(String? value) {
+    return RegExp(r'(?=.*?[0-9])').hasMatch(value ?? '');
   }
 
-  bool containsSpecialCharacter(value) {
-    return RegExp(r'(?=.*?[!@#\$&*~]).{8,}').hasMatch(value);
+  bool containsSpecialCharacter(String? value) {
+    return RegExp(r'(?=.*?[!@#\$&*~]).{8,}').hasMatch(value ?? '');
+  }
+
+  bool contains6Characters(String? value) {
+    return (value ??'').length >= 6;
   }
 
   //EMAIL VALIDATION
@@ -79,7 +85,7 @@ class StringService {
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = RegExp(pattern.toString());
     if(value != null) {
-      if (!regex.hasMatch(value)) {
+      if (!regex.hasMatch(value.trim())) {
         return 'Email format is invalid';
       } else {
         return null;

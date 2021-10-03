@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+
+//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:mullr_components/services/toast_service.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -37,7 +38,7 @@ class AuthService {
 
   Future<void> setup({bool development = false}) async {
     ConnectivityResult connectivityResult =
-        await (Connectivity().checkConnectivity());
+    await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       connectedToNetwork = true;
@@ -63,31 +64,23 @@ class AuthService {
     await auth().signOut();
   }
 
-  Future<bool> createUserWithEmail({
+  /// Attempt to create user with the given email and password
+  /// Returns '' if successful
+  /// Returns error string if not
+  Future<String> createUserWithEmail({
     required String email,
     required String password,
-    required BuildContext context,
   }) async {
-    // Try to create the user with an Email and Password in Firebase
     try {
       await auth()
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      return true;
+      return 'success';
     }
-    // If it fails, return false
     on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        GetIt.instance.get<ToastService>()
-            .showSnackbar(context, 'The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        GetIt.instance.get<ToastService>().showSnackbar(
-            context, 'The account already exists for that email.');
-      }
-      return false;
+      return e.code;
     } catch (e) {
-      print(e);
-      return false;
+      return e.toString();
     }
   }
 
@@ -104,8 +97,7 @@ class AuthService {
     }
   }
 
-  Future<bool> signInWithEmail({
-    required BuildContext context,
+  Future<String> signInWithEmail({
     required String email,
     required String password,
   }) async {
@@ -115,21 +107,15 @@ class AuthService {
         password: password,
       );
 
-      print('Signed in successfully');
       // Successfully signed in
-      return true;
+      return 'success';
     } on FirebaseAuthException catch (e) {
       print('Sign in error: ' + e.toString());
-      if (e.code == 'user-not-found') {
-        GetIt.instance.get<ToastService>().showSnackbar(context, 'No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        GetIt.instance.get<ToastService>()
-            .showSnackbar(context, 'Wrong password provided for that user.');
-      }
-      return false;
+
+      return e.code;
     } catch (e) {
       print('Sign in error: ' + e.toString());
-      return false;
+      return e.toString();
     }
   }
 
@@ -179,7 +165,7 @@ class AuthService {
 
                       // Create a PhoneAuthCredential with the code
                       PhoneAuthCredential credential =
-                          PhoneAuthProvider.credential(
+                      PhoneAuthProvider.credential(
                         verificationId: verificationId,
                         smsCode: verificationController.text,
                       );
@@ -237,7 +223,7 @@ class AuthService {
     }
   }
 
-  Future<bool> signInWithFacebook(BuildContext context) async {
+  /* Future<bool> signInWithFacebook(BuildContext context) async {
     // Trigger the sign-in flow
     final result = await FacebookAuth.instance.login();
 
@@ -253,7 +239,7 @@ class AuthService {
     }
 
     return true;
-  }
+  }*/
 
   /// Generates a cryptographically secure random nonce, to be included in a
   /// credential request.
@@ -327,17 +313,17 @@ class AuthService {
     List<String>? scopes,
     Map<String, String>? parameters,
   }) async {
-   /* try {
+    /* try {
       User? user = await FirebaseAuthOAuth()
           .openSignInFlow(provider, scopes!, parameters);
       return user;
     } on PlatformException catch (error) {
-      *//**
-       * The plugin has the following error codes:
-       * 1. FirebaseAuthError: FirebaseAuth related error
-       * 2. PlatformError: An platform related error
-       * 3. PluginError: An error from this plugin
-       *//*
+      */ /**
+              * The plugin has the following error codes:
+              * 1. FirebaseAuthError: FirebaseAuth related error
+              * 2. PlatformError: An platform related error
+              * 3. PluginError: An error from this plugin
+              */ /*
       debugPrint("$provider error - ${error.code}: ${error.message}");
       return null;
     }*/

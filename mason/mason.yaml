@@ -1,0 +1,5 @@
+bricks:
+  view:
+    path: bricks/view
+  main:
+    path: bricks\main

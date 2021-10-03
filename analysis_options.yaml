@@ -1,0 +1,40 @@
+include: package:flutter_lints/flutter.yaml
+
+# Including specific version so pre-commits don't fail when new pedantic version comes out
+# https://stackoverflow.com/questions/54117257/required-annotation-as-error-instead-of-warning
+
+analyzer:
+
+  #flutter pub global activate dart_code_metrics
+  #flutter pub global run dart_code_metrics:metrics lib
+  plugins:
+    - dart_code_metrics
+  errors:
+    file_names: error
+    missing_required_param: error
+    invalid_uri: error
+    #unused_import: error
+ # exclude: [mason/**]
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    lines-of-executable-code: 50
+    number-of-arguments: 4
+    maximum-nesting: 5
+  metrics-exclude:
+    - test/**
+  rules:
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+    - no-equal-then-else
+
+linter:
+  rules:
+  #- always_require_non_null_named_parameters
