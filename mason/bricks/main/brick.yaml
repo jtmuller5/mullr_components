@@ -1,4 +1,5 @@
 name: main
-description: Starting foundation for Mullr apps
+description: Starting foundation for new Mullr apps
 vars:
   - name
+# mason add --global --source path ./mason/bricks/main
