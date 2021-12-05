@@ -1,15 +1,13 @@
 // Class to hold the user's workout related information
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:mullr_components/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info/device_info.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/cupertino.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
-import 'navigation_service.dart';
 
 class UserService with ReactiveServiceMixin {
   /// ID used for video calling with Agora, set by SDK

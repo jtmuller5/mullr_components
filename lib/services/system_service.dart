@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info/device_info.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,6 +23,25 @@ class SystemService {
 
   double screenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
+  }
+  String screenType(BuildContext context){
+    if(screenWidth(context) > 1500){
+      return 'large';
+    } if (screenWidth(context) <= 1500 && screenWidth(context) > 800) {
+      return 'medium';
+    }  else{
+      return 'small';
+    }
+  }
+
+  int gridCount(BuildContext context){
+    if(screenWidth(context) > 1500){
+      return 3;
+    } if (screenWidth(context) <= 1500 && screenWidth(context) > 800) {
+      return 2;
+    }  else{
+      return 1;
+    }
   }
 
   /// Return device info for Android devices
