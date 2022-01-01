@@ -81,6 +81,10 @@ class SystemService {
     }
   }
 
+  bool isUrlValid(String url){
+    return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+  }
+
  /* Future<void> launchEmail(EmailTemplate email) async {
     String version;
     String buildNumber;
