@@ -24,6 +24,25 @@ class SystemService {
   double screenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
+  String screenType(BuildContext context){
+    if(screenWidth(context) > 1500){
+      return 'large';
+    } if (screenWidth(context) <= 1500 && screenWidth(context) > 800) {
+      return 'medium';
+    }  else{
+      return 'small';
+    }
+  }
+
+  int gridCount(BuildContext context){
+    if(screenWidth(context) > 1500){
+      return 3;
+    } if (screenWidth(context) <= 1500 && screenWidth(context) > 800) {
+      return 2;
+    }  else{
+      return 1;
+    }
+  }
 
   /// Return device info for Android devices
   Future<AndroidDeviceInfo> getAndroidDeviceInfo() async {
@@ -60,6 +79,10 @@ class SystemService {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  bool isUrlValid(String url){
+    return Uri.tryParse(url)?.hasAbsolutePath ?? false;
   }
 
  /* Future<void> launchEmail(EmailTemplate email) async {
