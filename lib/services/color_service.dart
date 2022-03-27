@@ -1,7 +1,17 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class ColorService {
+
+  Color getColorForBackground(Color background){
+    return background.computeLuminance() > .5 ? Colors.black : Colors.white;
+  }
+
+  Color getRandomColor(){
+    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  }
+
   ///The colorPickerDialog is an asynchronous bool function,
   ///that returns true if the user closed the dialog picker with the Select button.
   ///If Cancel was selected or user dismissed the dialog by clicking outside of it, false is returned
@@ -87,6 +97,10 @@ class ColorService {
     }
     return colors.last;
   }
+
+  Color adaptiveColor(BuildContext context){
+    return Theme.of(context).brightness == Brightness.dark ? Colors.grey[50]! : Colors.grey[850]!;
+  }
 }
 
 /// Get the color from a gradient at a specific position
@@ -112,4 +126,5 @@ extension ColorGetter on Gradient {
     }
     return colors.last;
   }
+
 }

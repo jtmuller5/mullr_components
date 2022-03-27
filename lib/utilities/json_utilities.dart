@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 
 DateTime? getDateFromTimestamp(dynamic timestamp) {
-  if (timestamp.runtimeType == Timestamp) {
+  if (timestamp is Timestamp) {
     return timestamp != null ? timestamp.toDate() : null;
-  } else if (timestamp.runtimeType == int) {
+  } else if (timestamp is int) {
     return DateTime.fromMicrosecondsSinceEpoch(timestamp);
   } else if (timestamp.runtimeType == String) {
     return DateTime.parse(timestamp);
