@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 DateTime? getDateFromTimestamp(dynamic timestamp) {
   if (timestamp is Timestamp) {
@@ -39,3 +40,15 @@ DocumentReference? getRefFromId(String? id) {
     return FirebaseFirestore.instance.collection('fl_content').doc(id);
   }
 }
+
+GeoFirePoint? getGeoPointFromMap(Map<String, dynamic>? data) {
+  if(data != null) {
+    GeoPoint geoPoint = data['geopoint'];
+    return GeoFirePoint(geoPoint.latitude, geoPoint.longitude);
+  }
+}
+
+Map? getMapFromGeoPoint(GeoFirePoint? point) {
+  return point?.data;
+}
+
