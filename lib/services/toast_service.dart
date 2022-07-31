@@ -34,6 +34,7 @@ class ToastService {
   Future<bool> askConfirmation({
     required BuildContext context,
     required String title,
+    required String subtitle,
     String yes = 'Continue',
     String no = 'Cancel',
   }) async {
@@ -42,6 +43,7 @@ class ToastService {
           builder: (context) {
             return AlertDialog(
               title: Text(title),
+              content: Text(subtitle),
               actions: [
                 TextButton(
                   child: Text(no),
